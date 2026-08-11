@@ -1,5 +1,5 @@
-`include "test_pkg.sv"
 `include "fifo_interface.sv"
+`include "test_pkg.sv"
 `include "ram_dp_ar_aw.sv"
 `include "sync_fifo.sv"
 
