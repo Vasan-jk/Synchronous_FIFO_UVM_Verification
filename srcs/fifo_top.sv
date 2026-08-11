@@ -5,7 +5,7 @@
 
 module fifo_top;
 import uvm_pkg::*;
-virtual fifo_if vif;
+virtual fifo_interface vif;
 bit clk, rst;
 
 
@@ -23,7 +23,7 @@ syn_fifo dut(
 );
 
 initial begin
-uvm_config_db#(virtual fifo_if)::set(null,"*","fifo_if",vif);
+uvm_config_db#(virtual fifo_interface)::set(null,"*","fifo_if",vif);
 $dumpfile("waves.vcd");
 $dumpvars;
 run_test();

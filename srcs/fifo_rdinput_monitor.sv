@@ -2,7 +2,7 @@ class fifo_rdinput_monitor extends uvm_monitor;
 `uvm_component_utils(fifo_rdinput_monitor)
 uvm_analysis_port #(fifo_seq_item) rdinput_monitor_port;
 
-virtual fifo_if.moninrd vif;
+virtual fifo_interface.moninrd vif;
 fifo_config rdmonin_cfg;
 fifo_seq_item tr;
 
@@ -14,7 +14,7 @@ function void build_phase(uvm_phase phase);
   super.build_phase(phase);
   if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_config",rdmonin_cfg)))
     `uvm_fatal(get_type_name(),"RD_INPUT_MONITOR CONFIG NOT CONNECTED")
-  wrinput_monitor_port = new(this,"rdinput_monitor_port);
+  rdinput_monitor_port = new(this,"rdinput_monitor_port");
 endfunction
 
 function void connect_phase(uvm_phase phase);

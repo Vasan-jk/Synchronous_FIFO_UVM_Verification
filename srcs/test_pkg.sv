@@ -15,6 +15,7 @@ import uvm_pkg::*;
 `include "fifo_output_monitor.sv"
 `include "fifo_wrinput_agent.sv"
 `include "fifo_rdinput_agent.sv"
+`include "fifo_output_agent.sv"
 `include "fifo_scoreboard.sv"
 `include "fifo_vsequencer.sv"
 `include "fifo_environment.sv"

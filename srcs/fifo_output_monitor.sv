@@ -1,8 +1,8 @@
 class fifo_output_monitor extends uvm_monitor;
 `uvm_component_utils(fifo_output_monitor)
-uvm_analysis_port#(trans) out_monitor_port;
+uvm_analysis_port#(fifo_seq_item) out_monitor_port;
 
-virtual fifo_if.monout vif;
+virtual fifo_interface.monout vif;
 fifo_config monout_cfg;
 fifo_seq_item tr;
 
@@ -12,7 +12,7 @@ endfunction
 
 function void build_phase(uvm_phase phase);
   super.build_phase(phase);
-  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_config",monout_cfg)))
+  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_cfg",monout_cfg)))
     `uvm_fatal(get_type_name(),"OUTPUT MONITOR CONFIG NOT CONNECTED")
   out_monitor_port = new(this,"out_monitor_port");
 endfunction

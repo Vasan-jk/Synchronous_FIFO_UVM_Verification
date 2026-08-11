@@ -1,7 +1,7 @@
 class fifo_wrdriver extends uvm_driver#(fifo_seq_item);
 `uvm_component_utils(fifo_wrdriver)
 fifo_config wrdrv_cfg;
-virtual fifo_if.drvwr vif;
+virtual fifo_interface.drvwr vif;
 fifo_seq_item tr;
 
 function new(string name = "fifo_wrdriver", uvm_component parent);

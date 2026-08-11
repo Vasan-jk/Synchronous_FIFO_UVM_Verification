@@ -1,7 +1,7 @@
 class fifo_rddriver extends uvm_driver#(fifo_seq_item);
 `uvm_component_utils(fifo_rddriver)
 fifo_config rddrv_cfg;
-virtual fifo_if.drvrd vif;
+virtual fifo_interface.drvrd vif;
 fifo_seq_item tr;
 
 function new(string name = "fifo_rddriver", uvm_component parent);
@@ -27,11 +27,12 @@ task run_phase(uvm_phase phase);
       drive(req);
       seq_item_port.item_done();
   end
+  end
 endtask
 
 task drive(tr); 
 begin
-  vif.drvrd_cb.data_in <= tr.data_in;
+  @(vif.drvrd_cb);
   vif.drvrd_cb.rd_cs <= tr.rd_cs;
   vif.drvrd_cb.rd_en <= tr.rd_en;
 end

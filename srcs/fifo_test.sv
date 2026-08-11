@@ -10,15 +10,15 @@ endfunction
 
 function void build_phase(uvm_phase phase);
   super.build_phase(phase);
-  env = fifo_environment::type_id::create("env");
+  env = fifo_environment::type_id::create("env", this);
 
   a_cfg = fifo_config::type_id::create("a_cfg");
 
   if(!(uvm_config_db #(fifo_config)::get(this,"","fifo_if",a_cfg.vif)))
     `uvm_fatal(get_type_name(),"TEST CONFIG NOT CONNECTED")
-  a_cfg.wrinput_agent_is_active = ISACTIVE;
-  a_cfg.rdinput_agent_is_active = ISACTIVE;
-  a_cfg.output_agent_is_active = ISPASSIVE;
+  a_cfg.wrinput_agent_is_active = UVM_ACTIVE;
+  a_cfg.rdinput_agent_is_active = UVM_ACTIVE;
+  a_cfg.output_agent_is_active = UVM_PASSIVE;
 
   uvm_config_db#(fifo_config)::set(this,"*","fifo_cfg",a_cfg);
   

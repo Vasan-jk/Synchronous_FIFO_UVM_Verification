@@ -1,13 +1,13 @@
 `include "defines.svh"
 class fifo_seq_item extends uvm_sequence_item;
-rand bit [DATA_WIDTH - 1: 0] data_in;
+rand bit [`DATA_WIDTH - 1: 0] data_in;
 rand bit wr_cs;
 rand bit rd_cs;
 rand bit wr_en;
 rand bit rd_en;
 bit full;
 bit empty;
-bit [DATA_WIDTH - 1: 0] data_out;
+bit [`DATA_WIDTH - 1: 0] data_out;
 
 `uvm_object_utils_begin(fifo_seq_item)
 `uvm_field_int(data_in, UVM_ALL_ON)

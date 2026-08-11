@@ -6,7 +6,7 @@ function new(string name = "fifo_wrsequence");
 endfunction
 
 task body();
-  req = trans::type_id::create("req");
+  req = fifo_seq_item::type_id::create("req");
   begin
     start_item(req);
     assert(req.randomize());

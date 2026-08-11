@@ -1,3 +1,4 @@
+`include "defines.svh"
 `uvm_analysis_imp_decl(_wrinmon)
 `uvm_analysis_imp_decl(_rdinmon)
 `uvm_analysis_imp_decl(_outmon)
@@ -6,7 +7,7 @@ class fifo_scoreboard extends uvm_scoreboard;
 `uvm_component_utils(fifo_scoreboard)
 
 bit [`DATA_WIDTH-1:0] q[$];
-bit [`DATA WIDTH-1:0] q_out;
+bit [`DATA_WIDTH-1:0] q_out;
 bit empty, full;
 uvm_analysis_imp_wrinmon #(fifo_seq_item, fifo_scoreboard) wrin_fifo;
 uvm_analysis_imp_rdinmon #(fifo_seq_item, fifo_scoreboard) rdin_fifo;
@@ -33,7 +34,7 @@ endfunction
 virtual function void write_rdinmon(fifo_seq_item t_rdinmon);
   t_rdin = t_rdinmon;  
 endfunction
-virtual function void write_outmon(fifo_seq_item t_wrinmon);
+virtual function void write_outmon(fifo_seq_item t_outmon);
   t_out = t_outmon;  
 endfunction
 
@@ -41,7 +42,7 @@ endfunction
 task run_phase(uvm_phase phase);
 forever begin
 
-    if((q.size() < (1<<`ADDR_WIDTH)) && t_wrin.wr_cs && t_wrin.wr_en)
+    if((q.size() < (1 << `ADDR_WIDTH)) && t_wrin.wr_cs && t_wrin.wr_en)
       q.push_front(t_wrin.data_in);
 
     if((q.size() > 0) && t_wrin.rd_cs && t_wrin.rd_en)begin

@@ -9,33 +9,33 @@ logic rd_en;
 logic full;
 logic empty;
 
-clocking drvrd_cb @(clocking clk);
+clocking drvrd_cb @(posedge clk);
 default input #1 output #1;
 input data_out, full, empty;
 output data_in, wr_cs, rd_cs, wr_en, rd_en;
 endclocking
 
 
-clocking drvwr_cb @(clocking clk);
+clocking drvwr_cb @(posedge clk);
 default input #1 output #1;
 input data_out, full, empty;
 output data_in, wr_cs, rd_cs, wr_en, rd_en;
 endclocking
 
 
-clocking moninrd_cb @(clocking clk);
+clocking moninrd_cb @(posedge clk);
 default input #1 output #1;
 input data_in, wr_cs, rd_cs, wr_en, rd_en;
 endclocking
 
 
-clocking moninwr_cb @(clocking clk);
+clocking moninwr_cb @(posedge clk);
 default input #1 output #1;
 input data_in, wr_cs, rd_cs, wr_en, rd_en;
 endclocking
 
 
-clocking monout_cb @(clocking clk);
+clocking monout_cb @(posedge clk);
 default input #1 output #1;
 input data_out, full, empty;
 endclocking

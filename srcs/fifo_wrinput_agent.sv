@@ -1,4 +1,4 @@
-module fifo_wrinput_agent extends uvm_agent;
+class fifo_wrinput_agent extends uvm_agent;
 `uvm_component_utils(fifo_wrinput_agent)
 fifo_wrsequencer wrsqr;
 fifo_wrdriver wrdrv;
@@ -11,18 +11,20 @@ endfunction
 
 function void build_phase(uvm_phase phase);
   super.build_phase(phase);
-  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_config", wrinp_cfg))) begin
+  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_config", wrinp_cfg))) 
     `uvm_fatal(get_type_name(),"WR_INPUT_AGENT_CONFIG_NOT_CONNECTED") 
-  if(wrinp.wrinput_agent_is_active == UVM_ACTIVE) begin
-  wrsqr = fifo_wrsequencer::type_id::create("wrsqr",this);
-  wrdrv = fifo_wrdriver::type_id::create("wrdrv",this);
+  
+  if(wrinp_cfg.wrinput_agent_is_active == UVM_ACTIVE) begin
+    wrsqr = fifo_wrsequencer::type_id::create("wrsqr",this);
+    wrdrv = fifo_wrdriver::type_id::create("wrdrv",this);
   end
   wrinmon = fifo_wrinput_monitor::type_id::create("wrinmon",this);
-endfuntion
+endfunction
 
-function void connetc_phase(uvm_phase phase);
-  if(wrinp.wrinput_agent_is_active == UVM_ACTIVE) begin
-    wrdrv.seq_item_port.connect(wrinmon.seq_item_export);
+function void connect_phase(uvm_phase phase);
+  super.connect_phase(phase);
+  if(wrinp_cfg.wrinput_agent_is_active == UVM_ACTIVE) begin
+    wrdrv.seq_item_port.connect(wrsqr.seq_item_export);
   end
 endfunction
 

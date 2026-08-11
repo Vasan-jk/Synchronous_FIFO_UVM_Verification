@@ -1,5 +1,4 @@
-class fifo_environment extends uvm_environment;
-
+class fifo_environment extends uvm_env;
 `uvm_component_utils(fifo_environment)
 
 fifo_vsequencer vsqr;
@@ -17,7 +16,7 @@ function void build_phase(uvm_phase phase);
   wrinagnt = fifo_wrinput_agent::type_id::create("wrinagnt", this);
   rdinagnt = fifo_rdinput_agent::type_id::create("rdinagnt", this);
   outagnt = fifo_output_agent::type_id::create("outagnt", this);
-  scb = fifo_subscriber::type_id::create("scb", this);
+  scb = fifo_scoreboard::type_id::create("scb", this);
 endfunction
 
 function void connect_phase(uvm_phase phase);
