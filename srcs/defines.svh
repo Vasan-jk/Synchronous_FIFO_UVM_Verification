@@ -1,0 +1,1 @@
+`define DATAWIDTH 8

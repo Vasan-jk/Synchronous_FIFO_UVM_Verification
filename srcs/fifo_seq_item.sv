@@ -1,3 +1,4 @@
+`include "defines.svh"
 class fifo_seq_item extends uvm_sequence_item;
 rand bit [DATA_WIDTH - 1: 0] data_in;
 rand bit wr_cs;
@@ -17,7 +18,7 @@ bit [DATA_WIDTH - 1: 0] data_out;
 `uvm_field_int(full, UVM_ALL_ON)
 `uvm_field_int(empty, UVM_ALL_ON)
 `uvm_field_int(data_out, UVM_ALL_ON)
-
+`uvm_object_utils_end
 function new(string name = "fifo_seq_item");
 super.new(name);
 endfunction

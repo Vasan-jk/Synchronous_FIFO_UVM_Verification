@@ -26,11 +26,13 @@ task run_phase(uvm_phase phase);
       seq_item_port.get_next_item(req);
       drive(req);
       seq_item_port.item_done();
+    end
   end
 endtask
 
 task drive(tr); 
 begin
+  @(vif.drvwr_cb);
   vif.drvwr_cb.data_in <= tr.data_in;
   vif.drvwr_cb.wr_cs <= tr.wr_cs;
   vif.drvwr_cb.wr_en <= tr.wr_en;
