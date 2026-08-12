@@ -35,6 +35,7 @@ begin
   vif.drvwr_cb.data_in <= tr.data_in;
   vif.drvwr_cb.wr_cs <= tr.wr_cs;
   vif.drvwr_cb.wr_en <= tr.wr_en;
+  `uvm_info("WR_DRIVER",$sformatf("WR DRIVER\n%s",tr.sprint()),UVM_HIGH)
 end
 endtask
 

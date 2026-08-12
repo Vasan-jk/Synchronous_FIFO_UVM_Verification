@@ -34,6 +34,7 @@ begin
   @(vif.drvrd_cb);
   vif.drvrd_cb.rd_cs <= tr.rd_cs;
   vif.drvrd_cb.rd_en <= tr.rd_en;
+  `uvm_info("RD DRIVER",$sformatf("RD DRIVER\n%s",tr.sprint()),UVM_HIGH)
 end
 endtask
 

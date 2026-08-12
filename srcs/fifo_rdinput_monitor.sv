@@ -28,7 +28,6 @@ task run_phase(uvm_phase phase);
     repeat(4) @(vif.moninrd_cb);
   forever begin
     collect_input();
-    `uvm_info("WR_INPUT_MONITOR",$sformatf("Write Input MONITOR\n%s",tr.sprint()),UVM_HIGH)  
   end
   end
 endtask
@@ -39,6 +38,7 @@ task collect_input();
   tr = fifo_seq_item::type_id::create("tr");
   tr.rd_cs = vif.moninrd_cb.rd_cs;
   tr.rd_en = vif.moninrd_cb.rd_en;
+  `uvm_info("RD_INPUT_MONITOR",$sformatf("READ INPUT MONITOR\n%s",tr.sprint()),UVM_HIGH)  
   rdinput_monitor_port.write(tr);
   end
 endtask

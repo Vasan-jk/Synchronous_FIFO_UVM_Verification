@@ -43,9 +43,12 @@ forever begin
     if(t_wrin.rd_cs && t_wrin.rd_en)begin
       if(q.size() > 0)begin
         q_out = q.pop_back();
-          if(q_out != t_rdin.data_out) begin
+          if(q_out != t_out.data_out) begin
             `uvm_error("SCOREBOARD","DATA OUT MISMATCH")
+            `uvm_info("DATA_OUT", $sformatf("q_out = %0h, data_out = %0h",q_out, t_out.data_out),UVM_NONE) 
         end
+          else
+            `uvm_info("SCOREBOARD","DATA OUT MATCHED",UVM_NONE)
       end
     end
     
@@ -55,15 +58,20 @@ forever begin
         if(exp_emp != t_out.empty) begin
           `uvm_error("SCOREBOARD","EMPTY MISMATCH")
         end
+        else
+          `uvm_info("SCOREBOARD","EMPTY MATCHED",UVM_NONE)
       end
     end
 
     begin
-    exp_full = q.size() == (1<<`ADDR_WIDTH) ? 1:0;
+    exp_full = q.size() == (`RAM_DEPTH) ? 1:0;
     if(exp_full) begin
         if(exp_full != t_out.full) begin
           `uvm_error("SCOREBOARD", "FULL MISMATCH")
+            `uvm_info("FULL", $sformatf("exp_full = %0h, t_out.full = %0h",exp_full, t_out.full),UVM_NONE) 
         end
+        else
+          `uvm_info("SCOREBOARD","FULL MATCHED",UVM_NONE)
       end
     end
 end

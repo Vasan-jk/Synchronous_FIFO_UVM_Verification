@@ -28,7 +28,6 @@ task run_phase(uvm_phase phase);
     repeat(4) @(vif.moninwr_cb);
   forever begin
     collect_input();
-    `uvm_info("WR_INPUT_MONITOR",$sformatf("Write Input MONITOR\n%s",tr.sprint()),UVM_HIGH)  
   end
   end
 endtask
@@ -40,6 +39,7 @@ task collect_input();
   tr.data_in = vif.moninwr_cb.data_in;
   tr.wr_cs = vif.moninwr_cb.wr_cs;
   tr.wr_en = vif.moninwr_cb.wr_en;
+  `uvm_info("WR_INPUT_MONITOR",$sformatf("WR INPUT MONITOR\n%s",tr.sprint()),UVM_HIGH)
   wrinput_monitor_port.write(tr);
   end
 endtask

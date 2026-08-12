@@ -27,7 +27,7 @@ task run_phase(uvm_phase phase);
   forever begin
     tr = fifo_seq_item::type_id::create("tr");
     collect_data();
-    `uvm_info("OUTPUT_MONITOR",$sformatf("OUTPUT MONITOR\n%s",tr.sprint()),UVM_NONE) 
+    `uvm_info("OUTPUT_MONITOR",$sformatf("OUTPUT MONITOR\n%s",tr.sprint()),UVM_HIGH) 
   end
 endtask
 
