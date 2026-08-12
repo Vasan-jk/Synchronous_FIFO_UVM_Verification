@@ -11,7 +11,7 @@ endfunction
 
 function void build_phase(uvm_phase phase);
   super.build_phase(phase);
-  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_config", rdinp_cfg)))
+  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_cfg", rdinp_cfg)))
     `uvm_fatal(get_type_name(),"RD_INPUT_AGENT_CONFIG_NOT_CONNECTED") 
   if(rdinp_cfg.wrinput_agent_is_active == UVM_ACTIVE) begin
   rdsqr = fifo_rdsequencer::type_id::create("rdsqr",this);

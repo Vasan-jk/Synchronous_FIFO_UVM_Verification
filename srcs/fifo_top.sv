@@ -5,25 +5,26 @@
 
 module fifo_top;
 import uvm_pkg::*;
-virtual fifo_interface vif;
+import test_pkg::*;
 bit clk, rst;
+fifo_interface fif(.clk(clk), .rst(rst));
 
 
 syn_fifo dut(
 .clk(clk)      , // Clock input
 .rst(rst)      , // Active high reset
-.wr_cs(vif.wr_cs)    , // Write chip select
-.rd_cs(vif.rd_cs)    , // Read chip select
-.data_in(vif.data_in)  , // Data input
-.rd_en(vif.rd_en)    , // Read enable
-.wr_en(vif.wr_en)    , // Write Enable
-.data_out(vif.data_out) , // Data Output
-.empty(vif.empty)    , // FIFO empty
-.full(vif.full)       // FIFO full
+.wr_cs(fif.wr_cs)    , // Write chip select
+.rd_cs(fif.rd_cs)    , // Read chip select
+.data_in(fif.data_in)  , // Data input
+.rd_en(fif.rd_en)    , // Read enable
+.wr_en(fif.wr_en)    , // Write Enable
+.data_out(fif.data_out) , // Data Output
+.empty(fif.empty)    , // FIFO empty
+.full(fif.full)       // FIFO full
 );
 
 initial begin
-uvm_config_db#(virtual fifo_interface)::set(null,"*","fifo_if",vif);
+uvm_config_db#(virtual fifo_interface)::set(null,"*","fifo_if",fif);
 $dumpfile("waves.vcd");
 $dumpvars;
 run_test();

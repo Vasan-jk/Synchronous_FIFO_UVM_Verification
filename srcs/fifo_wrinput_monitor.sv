@@ -12,9 +12,9 @@ endfunction
 
 function void build_phase(uvm_phase phase);
   super.build_phase(phase);
-  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_config",wrmonin_cfg)))
+  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_cfg",wrmonin_cfg)))
     `uvm_fatal(get_type_name(),"WR_INPUT_MONITOR CONFIG NOT CONNECTED")
-  wrinput_monitor_port = new(this,"wrinput_monitor_port");
+  wrinput_monitor_port = new("wrinput_monitor_port", this);
 endfunction
 
 function void connect_phase(uvm_phase phase);
@@ -25,7 +25,7 @@ endfunction
 task run_phase(uvm_phase phase);
   super.run_phase(phase);
   begin
-    repeat(2) @(vif.moninwr_cb);
+    repeat(4) @(vif.moninwr_cb);
   forever begin
     collect_input();
     `uvm_info("WR_INPUT_MONITOR",$sformatf("Write Input MONITOR\n%s",tr.sprint()),UVM_HIGH)  
@@ -40,6 +40,7 @@ task collect_input();
   tr.data_in = vif.moninwr_cb.data_in;
   tr.wr_cs = vif.moninwr_cb.wr_cs;
   tr.wr_en = vif.moninwr_cb.wr_en;
+  wrinput_monitor_port.write(tr);
   end
 endtask
 endclass

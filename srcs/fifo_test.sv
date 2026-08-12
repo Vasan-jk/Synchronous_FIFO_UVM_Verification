@@ -14,7 +14,7 @@ function void build_phase(uvm_phase phase);
 
   a_cfg = fifo_config::type_id::create("a_cfg");
 
-  if(!(uvm_config_db #(fifo_config)::get(this,"","fifo_if",a_cfg.vif)))
+  if(!(uvm_config_db #(virtual fifo_interface)::get(this,"","fifo_if",a_cfg.vif)))
     `uvm_fatal(get_type_name(),"TEST CONFIG NOT CONNECTED")
   a_cfg.wrinput_agent_is_active = UVM_ACTIVE;
   a_cfg.rdinput_agent_is_active = UVM_ACTIVE;
@@ -32,4 +32,5 @@ task run_phase(uvm_phase phase);
   vseq.start(env.vsqr);
   phase.drop_objection(this);
 endtask
-endclass  
+endclass
+

@@ -11,7 +11,7 @@ endfunction
 
 function void build_phase(uvm_phase phase);
   super.build_phase(phase);
-  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_config", wrinp_cfg))) 
+  if(!(uvm_config_db#(fifo_config)::get(this,"","fifo_cfg", wrinp_cfg))) 
     `uvm_fatal(get_type_name(),"WR_INPUT_AGENT_CONFIG_NOT_CONNECTED") 
   
   if(wrinp_cfg.wrinput_agent_is_active == UVM_ACTIVE) begin

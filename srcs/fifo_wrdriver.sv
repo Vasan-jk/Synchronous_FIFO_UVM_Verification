@@ -2,7 +2,6 @@ class fifo_wrdriver extends uvm_driver#(fifo_seq_item);
 `uvm_component_utils(fifo_wrdriver)
 fifo_config wrdrv_cfg;
 virtual fifo_interface.drvwr vif;
-fifo_seq_item tr;
 
 function new(string name = "fifo_wrdriver", uvm_component parent);
   super.new(name, parent);
@@ -21,7 +20,7 @@ endfunction
 
 task run_phase(uvm_phase phase);
   begin
-    repeat(2) @(vif.drvwr_cb);
+    repeat(3) @(vif.drvwr_cb);
     forever begin
       seq_item_port.get_next_item(req);
       drive(req);
@@ -30,7 +29,7 @@ task run_phase(uvm_phase phase);
   end
 endtask
 
-task drive(tr); 
+task drive(fifo_seq_item tr); 
 begin
   @(vif.drvwr_cb);
   vif.drvwr_cb.data_in <= tr.data_in;

@@ -23,9 +23,12 @@ endfunction
 
 function void build_phase(uvm_phase phase);
   super.build_phase(phase);
-  wrin_fifo = new(this, "wrin_fifo");
-  rdin_fifo = new(this, "rdin_fifo");
-  out_fifo = new(this,"out_fifo");
+  wrin_fifo = new("wrin_fifo", this);
+  rdin_fifo = new("rdin_fifo", this);
+  out_fifo = new("out_fifo", this);
+  t_wrin = fifo_seq_item::type_id::create("t_wrin");
+  t_rdin = fifo_seq_item::type_id::create("t_rdin");
+  t_out  = fifo_seq_item::type_id::create("t_out");
 endfunction
 
 virtual function void write_wrinmon(fifo_seq_item t_wrinmon);
@@ -40,6 +43,7 @@ endfunction
 
 
 task run_phase(uvm_phase phase);
+
 forever begin
 
     if((q.size() < (1 << `ADDR_WIDTH)) && t_wrin.wr_cs && t_wrin.wr_en)
