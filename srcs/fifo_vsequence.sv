@@ -17,7 +17,7 @@ task body();
 
   fork 
     wrseq.start(p_sequencer.wrsqr);
-    wrseq.start(p_sequencer.rdsqr);
+    rdseq.start(p_sequencer.rdsqr);
   join
 endtask
 endclass

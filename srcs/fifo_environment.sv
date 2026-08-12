@@ -22,6 +22,9 @@ endfunction
 function void connect_phase(uvm_phase phase);
   vsqr.wrsqr = wrinagnt.wrsqr;
   vsqr.rdsqr = rdinagnt.rdsqr;
+  wrinagnt.wrinmon.wrinput_monitor_port.connect(scb.wrin_fifo.analysis_export);
+  rdinagnt.rdinmon.rdinput_monitor_port.connect(scb.rdin_fifo.analysis_export);
+  outagnt.outmon.out_monitor_port.connect(scb.out_fifo.analysis_export);
 endfunction
 
 endclass

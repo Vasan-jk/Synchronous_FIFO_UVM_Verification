@@ -9,7 +9,7 @@ task body();
   req = fifo_seq_item::type_id::create("req");
   begin
     start_item(req);
-    assert(req.randomize());
+    assert(req.randomize() with{ wr_en == 1; wr_cs == 1;});
     finish_item(req);
   end
 endtask
